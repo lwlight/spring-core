@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <spring.ver>3.2.13.RELEASE</spring.ver>
+        <commons-io.ver>2.6</commons-io.ver>
     </properties>
 
     <dependencies>
@@ -30,5 +31,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.ver}</version>
+        </dependency>
+
     </dependencies>
 </project>

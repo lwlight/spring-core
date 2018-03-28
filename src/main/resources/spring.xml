@@ -12,9 +12,14 @@
 
     <bean id="eventLogger" class="com.epam.lab.spring.core.work.ConsoleEventLogger" />
 
+    <bean id="fileLogin" class="com.epam.lab.spring.core.work.FileEventLogger">
+        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring"/>
+
+    </bean>
+
     <bean id="app" class="com.epam.lab.spring.core.work.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="fileLogin"/>
     </bean>
 
     <bean id="event" scope="prototype" class="com.epam.lab.spring.core.work.Event">
@@ -25,5 +30,7 @@
             <bean class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
         </constructor-arg>
     </bean>
+
+
 
 </beans>
