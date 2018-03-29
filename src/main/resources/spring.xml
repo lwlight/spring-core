@@ -12,9 +12,14 @@
 
     <bean id="eventLogger" class="com.epam.lab.spring.core.work.ConsoleEventLogger" />
 
-    <bean id="fileLogin" class="com.epam.lab.spring.core.work.FileEventLogger">
-        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring"/>
+    <bean id="fileLogin" class="com.epam.lab.spring.core.work.FileEventLogger" init-method="init">
+        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring.txt"/>
+    </bean>
 
+    <bean id="cacheFileLogger" class="com.epam.lab.spring.core.work.CacheFileEventLogger"
+          init-method="init"
+          destroy-method="destroy">
+        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring.txt"/>
     </bean>
 
     <bean id="app" class="com.epam.lab.spring.core.work.App">

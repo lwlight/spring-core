@@ -15,7 +15,8 @@ public class FileEventLogger implements EventLogger {
 
     public void logEvent(Event event){
         try {
-            FileUtils.writeStringToFile(file, fileName, true);
+            String message = event.getMsg() + "\n";
+            FileUtils.writeStringToFile(file, message, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,6 +24,10 @@ public class FileEventLogger implements EventLogger {
 
     private  void init() throws IOException{
         this.file = new File(fileName);
+
+        if (!file.canWrite()) {
+            throw new IOException("!!!!! > Can't write into this file");
+        }
     }
 
     public String getFileName() {
