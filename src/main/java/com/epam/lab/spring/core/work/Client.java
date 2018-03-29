@@ -3,6 +3,7 @@ package com.epam.lab.spring.core.work;
 public class Client {
     private int id;
     private String fullName;
+    private String greeting;
 
     public Client() {
     }
@@ -26,5 +27,13 @@ public class Client {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
     }
 }

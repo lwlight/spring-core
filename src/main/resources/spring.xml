@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
- 		http://www.springframework.org/schema/beans
- 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
 
-    <bean id="client" class="com.epam.lab.spring.core.work.Client">
-        <constructor-arg type="int" value="1"/>
-        <constructor-arg type="java.lang.String" value="John Smith"/>
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 		http://www.springframework.org/schema/util
+ 		http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="false">
+
+    <import resource="loggers.xml"/>
+
+    <util:map id="loggerMap">
+        <entry key="INFO" value-ref="eventLogger"/>
+        <entry key="ERROR" value-ref="combinedLogger"/>
+    </util:map>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:client.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
     </bean>
 
-    <bean id="eventLogger" class="com.epam.lab.spring.core.work.ConsoleEventLogger" />
-
-    <bean id="fileLogin" class="com.epam.lab.spring.core.work.FileEventLogger" init-method="init">
-        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring.txt"/>
-    </bean>
-
-    <bean id="cacheFileLogger" class="com.epam.lab.spring.core.work.CacheFileEventLogger"
-          init-method="init"
-          destroy-method="destroy">
-        <constructor-arg type="java.lang.String" value="d:/java/files/fileforspring.txt"/>
+    <bean id="client" class="com.epam.lab.spring.core.work.Client"
+         c:id="${id}" c:fullName="${name}" p:greeting="${greeting}">
+        <!--<constructor-arg value="${id}"/>-->
+        <!--<constructor-arg value="${name}"/>-->
+        <!--<property name="greeting" value="${greeting}"/>-->
     </bean>
 
     <bean id="app" class="com.epam.lab.spring.core.work.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="fileLogin"/>
+        <constructor-arg ref="fileLogger"/>
+        <constructor-arg ref="loggerMap"/>
     </bean>
 
     <bean id="event" scope="prototype" class="com.epam.lab.spring.core.work.Event">
