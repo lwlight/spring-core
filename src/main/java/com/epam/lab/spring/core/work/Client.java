@@ -1,5 +1,11 @@
 package com.epam.lab.spring.core.work;
 
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier("client")
 public class Client {
     private int id;
     private String fullName;

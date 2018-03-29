@@ -1,9 +1,11 @@
 package com.epam.lab.spring.core.work.loggers;
 
 import com.epam.lab.spring.core.work.Event;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+@Component
 public class CombinedEventLogger implements EventLogger {
     Collection<EventLogger> loggers;
 

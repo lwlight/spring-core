@@ -1,10 +1,14 @@
 package com.epam.lab.spring.core.work.loggers;
 
 import com.epam.lab.spring.core.work.Event;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class CacheFileEventLogger extends FileEventLogger {
+    @Value("${cache.size:5}")
     private int cacheSize;
     private List<Event> cache;
 

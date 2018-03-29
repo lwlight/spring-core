@@ -1,10 +1,17 @@
 package com.epam.lab.spring.core.work;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 
+@Component
+@Qualifier("event")
+//@Scope("prototype")
 public class Event implements Serializable {
     private int id;
     private String msg;
